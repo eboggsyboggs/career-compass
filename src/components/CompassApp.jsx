@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Home, Star, Compass, Map, Route, FileText, ChevronLeft } from 'lucide-react'
 import NorthStarStep from './steps/NorthStarStep'
 import CardinalDirectionsStep from './steps/CardinalDirectionsStep'
@@ -20,6 +20,11 @@ const CompassApp = ({ onBack }) => {
     opportunities: '',
     routeStart: '',
   })
+
+  // Scroll to top whenever step changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [currentStep])
 
   const updateFormData = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }))
