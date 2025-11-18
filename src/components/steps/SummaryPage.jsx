@@ -155,7 +155,7 @@ ROUTE (0-90 Days):
 ${formData.routeStart || 'Not yet defined'}
 
 -------------------------
-Review your compass at: [YOUR_APP_URL_HERE]
+Review your compass at: https://your-career-compass.vercel.app
 
 Remember: Your compass is a living document. Update it as you grow and your goals evolve.
     `.trim()

@@ -21,9 +21,9 @@ const CompassApp = ({ onBack }) => {
     routeStart: '',
   })
 
-  // Scroll to top whenever step changes
+  // Jump to top whenever step changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo(0, 0)
   }, [currentStep])
 
   const updateFormData = (field, value) => {
