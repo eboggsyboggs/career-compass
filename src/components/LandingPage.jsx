@@ -58,6 +58,18 @@ const LandingPage = ({ onStart }) => {
           <p className="text-xl lg:text-2xl text-stone-600 mb-8 leading-relaxed">
             Navigate your career with purpose, not just a plan. Define your North Star and chart a course that adapts as you grow.
           </p>
+
+          {/* CTA Section */}
+          <div className="text-center mb-12">
+            <button
+              onClick={onStart}
+              className="group inline-flex items-center gap-3 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
+              Begin Your Journey
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <p className="mt-4 text-stone-600">Takes 15 minutes or less</p>
+          </div>
           
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-stone-200 mb-12">
             <h2 className="text-2xl font-semibold text-stone-900 mb-4">Why a Compass, Not a GPS?</h2>
@@ -93,7 +105,7 @@ const LandingPage = ({ onStart }) => {
             Your Journey in Four Sections
           </h2>
           <p className="text-center text-stone-600 mb-12 text-lg">
-            A thoughtful framework to move from vision to action in 30 minutes
+            A thoughtful framework to move from vision to action
           </p>
           
           <div className="grid md:grid-cols-2 gap-8">
@@ -209,18 +221,6 @@ const LandingPage = ({ onStart }) => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center">
-          <button
-            onClick={onStart}
-            className="group inline-flex items-center gap-3 bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg px-10 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-          >
-            Begin Your Journey
-            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-          </button>
-          <p className="mt-4 text-stone-600">Takes approximately 30 minutes</p>
         </div>
       </div>
     </div>
