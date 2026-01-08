@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { FileText, Printer, Download, Star, Compass, Map, Route, Edit2, Bell, ChevronDown } from 'lucide-react'
+import { FileText, Copy, Download, Star, Compass, Map, Route, Edit2, Bell, ChevronDown } from 'lucide-react'
 
 const SummaryPage = ({ formData, onNavigate }) => {
   const [showReminderDropdown, setShowReminderDropdown] = useState(false)
+  const [copySuccess, setCopySuccess] = useState(false)
   const dropdownRef = useRef(null)
 
   // Close dropdown when clicking outside
@@ -22,8 +23,69 @@ const SummaryPage = ({ formData, onNavigate }) => {
     }
   }, [showReminderDropdown])
 
-  const handlePrint = () => {
-    window.print()
+  const handleCopy = async () => {
+    const content = `
+MY CAREER COMPASS
+=================
+
+STEP 1: YOUR NORTH STAR (5–10 Years)
+------------------------------------
+
+Ideal Future State & Impact:
+${formData.futureState || 'Not yet defined'}
+
+Purpose Statement:
+${formData.impact || 'Not yet defined'}
+
+
+STEP 2: CARDINAL DIRECTIONS (Your Inventory)
+---------------------------------------------
+
+North (Non-negotiables):
+${formData.nonNegotiables || 'Not yet defined'}
+
+South (Strengths):
+${formData.strengths || 'Not yet defined'}
+
+East (Energizers):
+${formData.energizers || 'Not yet defined'}
+
+West (Wants/Gaps):
+${formData.gapsWants || 'Not yet defined'}
+
+
+STEP 3: MAP THE TERRAIN (3–5 Years)
+------------------------------------
+
+Milestones:
+${formData.milestones || 'Not yet defined'}
+
+Constraints:
+${formData.constraints || 'Not yet defined'}
+
+Opportunities:
+${formData.opportunities || 'Not yet defined'}
+
+
+STEP 4: START THE ROUTE (0–90 Days)
+------------------------------------
+
+90-Day Moves & Habit Commitment:
+${formData.routeStart || 'Not yet defined'}
+
+
+---
+Generated: ${new Date().toLocaleDateString()}
+Review this compass every 3-6 months to ensure you are still on course.
+    `.trim()
+
+    try {
+      await navigator.clipboard.writeText(content)
+      setCopySuccess(true)
+      setTimeout(() => setCopySuccess(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
+    }
   }
 
   const handleDownload = () => {
@@ -253,11 +315,11 @@ END:VCALENDAR`.trim()
           </div>
 
           <button
-            onClick={handlePrint}
+            onClick={handleCopy}
             className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
           >
-            <Printer className="w-4 h-4" />
-            Print
+            <Copy className="w-4 h-4" />
+            {copySuccess ? 'Copied!' : 'Copy'}
           </button>
           <button
             onClick={handleDownload}

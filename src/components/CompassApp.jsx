@@ -8,18 +8,34 @@ import SummaryPage from './steps/SummaryPage'
 
 const CompassApp = ({ onBack }) => {
   const [currentStep, setCurrentStep] = useState('intro')
-  const [formData, setFormData] = useState({
-    futureState: '',
-    impact: '',
-    nonNegotiables: '',
-    strengths: '',
-    energizers: '',
-    gapsWants: '',
-    milestones: '',
-    constraints: '',
-    opportunities: '',
-    routeStart: '',
+  const [formData, setFormData] = useState(() => {
+    // Load from localStorage on initial mount
+    const saved = localStorage.getItem('careerCompassData')
+    if (saved) {
+      try {
+        return JSON.parse(saved)
+      } catch (e) {
+        console.error('Failed to parse saved data:', e)
+      }
+    }
+    return {
+      futureState: '',
+      impact: '',
+      nonNegotiables: '',
+      strengths: '',
+      energizers: '',
+      gapsWants: '',
+      milestones: '',
+      constraints: '',
+      opportunities: '',
+      routeStart: '',
+    }
   })
+
+  // Save to localStorage whenever formData changes
+  useEffect(() => {
+    localStorage.setItem('careerCompassData', JSON.stringify(formData))
+  }, [formData])
 
   // Jump to top whenever step changes
   useEffect(() => {
